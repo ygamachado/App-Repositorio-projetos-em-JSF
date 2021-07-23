@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="template.xhtml">
+        <ui:define name="body">
+            <f:view>
+                
+                    <h:form id="cadast">
+                        <p:panel header="">
+
+                            <p:growl id="growl" life="2000" />
+
+
+                            <h1 ><h:outputText value="Logar"/></h1>
+                            <p:panelGrid columns="2">
+
+                                <p:outputLabel value="Nome:" for="nome" />
+                                <p:inputText id="nome" value="#{loginController.login.login}" title="Nome" required="true" requiredMessage= "O campo Nome é obrigatório."/>
+                                <p:outputLabel value="Senha:" for="senha" />
+                                <p:password  id="senha" value="#{loginController.login.senha}" title="Senha" required="true" requiredMessage= "O campo Senha é obrigatório."/>
+                                <p:commandButton value="Entrar" id="ajax" update="@form growl" action="#{loginController.logarNoSistema}"/>
+
+                            </p:panelGrid>
+                            <p:messages />
+                        </p:panel>
+                    </h:form>
+                </f:view>
+        </ui:define>
+    </ui:composition>
+</html>
+

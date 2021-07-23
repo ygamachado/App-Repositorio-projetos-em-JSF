@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <ui:insert name="title">
+            <link rel="shortcut icon" href="_imagens/icon_logo_ifba.jpg" />
+            <title>RepoSystem</title>
+            <link rel="stylesheet" type="text/css" href="_css/estilo.css"/>    
+            <link rel="stylesheet" type="text/css" media="screen and (min-width: 0px)"  href="_css/small.css"/>
+            <link rel="stylesheet" type="text/css" media="screen and (min-width: 1000px)"  href="_css/medium.css"/>
+            <link rel="stylesheet" type="text/css" media="screen and (min-width: 1350px)"  href="_css/large.css"/>
+        </ui:insert>
+    </h:head>
+    <h:body>
+
+        <div class="geral">
+
+
+            <ui:insert name="header">
+                <img id="titulo" src="_imagens/logo_ifba_irece_header.jpg"/>
+
+                <div id="menu">
+                    <a id="homelink" href="index.xhtml">Home</a>
+                    <a href="listarProjetos.xhtml">Listar Projetos</a>
+                    <a href="login.xhtml"> Login</a>
+
+                </div>
+            </ui:insert>
+            <div class="central">
+                <ui:insert name="body"></ui:insert>
+            </div>
+            <div class="footer">
+                <ui:insert name="footer">
+                    <hr/>
+                    <p>by Ygael Machado - 2018 &copy; <br/>Instituto Federal de Educação, Ciência e Tecnologia da Bahia - Campus Irecê 
+                        Rodovia BA 148, km 04, n°. 1800 – Bairro Vila Esperança. Irecê / BA</p>
+                </ui:insert>
+            </div>
+        </div>
+    </h:body>
+</html>
+
