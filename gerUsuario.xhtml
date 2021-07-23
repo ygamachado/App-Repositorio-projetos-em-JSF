@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition template="template3.xhtml">
+        <ui:define name="body">
+            <p:panel header="Usuários">
+                <h:form class="forms" id="formCadastro">
+                    <p:growl id="growl" life="2000" />
+
+
+                    <h1><h:outputText value="Cadastrar/Editar"/></h1>
+                    <p:panelGrid columns="2">
+                        <p:outputLabel value="Dados" for="id" />
+                        <h:inputHidden id="id" value="#{UsuarioMB.usuario.idusuario}"/>
+
+                        <p:outputLabel value="Nome:" for="nome" />
+                        <p:inputText id="nome" value="#{UsuarioMB.usuario.nome}" title="Nome" required="true" requiredMessage= "O campo Nome é obrigatório."/>
+                        <p:outputLabel value="Login:" for="login" />
+                        <p:inputText id="login" value="#{UsuarioMB.usuario.login}" title="Login" required="true" requiredMessage= "O campo Login é obrigatório."/>
+                        <p:outputLabel value="Senha:" for="senha"/>
+                        <p:inputText id="senha" value="#{UsuarioMB.usuario.senha}" title="Senha" required="true" requiredMessage= "O campo Senha é obrigatório."/>
+                        <p:outputLabel value="Tipo:" for="tipo" />
+                        <p:selectOneMenu id="tipo" value="#{UsuarioMB.usuario.tipo}" style="width:125px">
+                            <f:selectItem itemLabel="Proponente" itemValue="Proponente" />
+                            <f:selectItem itemLabel="Gerente" itemValue="Gerente" />
+                        </p:selectOneMenu>
+                        <p:commandButton value="Salvar" id="ajax" update="growl @form :formLista" actionListener="#{UsuarioMB.buttonAction(actionEvent)}" styleClass="ui-priority-primary" />
+                        <p:commandButton value="Cancelar" action="#{UsuarioMB.limpar}" update="@form" process="@this"/>
+
+                    </p:panelGrid>
+                    <p:messages />
+
+
+                </h:form>
+            </p:panel>
+
+
+
+            <h:form id="formLista">
+                <p:panel header="Lista de Usuários Cadastrados">
+                    <h1><h:outputText value=""/></h1>
+                    <p:dataTable value="#{UsuarioMB.lista}" var="item" emptyMessage="Sem Registros" rows="10" paginator="true" paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10">
+                        
+                        <p:column filterBy="#{item.nome}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Nome"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nome}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Login"/>
+                            </f:facet>
+                            <h:outputText value="#{item.login}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Senha"/>
+                            </f:facet>
+                            <h:outputText value="#{item.senha}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tipo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipo}"/>
+                        </p:column>
+                        <p:growl id="message" showDetail="true" />
+                        <p:column headerText="Ações">
+                            <p:commandButton value="Alterar" action="#{UsuarioMB.carregarUsuario(item)}" process="@this" update="@form :formCadastro" style="width:80px;height:25px;font-size: 8pt"/>
+                            <p:commandButton value="Deletar" actionListener="#{UsuarioMB.deletar(item)}" update="message @form :formLista" style="width:80px;height:25px;font-size: 8pt">
+                                <p:confirm header="Confirmation" message="Tem certeza?" icon="ui-icon-alert" />
+                            </p:commandButton>
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</html>
+
